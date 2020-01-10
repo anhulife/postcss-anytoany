@@ -1,5 +1,5 @@
 {
-  "name": "@anhulife/postcss-pxtorem",
+  "name": "postcss-anytoany",
   "description": "A CSS post-processor that converts px to rem.",
   "version": "4.0.1",
   "author": "cuth",

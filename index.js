@@ -26,7 +26,7 @@ var legacyOptions = {
     'propWhiteList': 'propList'
 };
 
-module.exports = postcss.plugin('postcss-pxtorem', function (options) {
+module.exports = postcss.plugin('postcss-anytoany', function (options) {
 
     convertLegacyOptions(options);
 

@@ -1,14 +1,14 @@
 {
   "name": "postcss-anytoany",
-  "description": "A CSS post-processor that converts px to rem.",
+  "description": "A CSS post-processor that converts px|any to rem|any.",
   "version": "5.0.0",
-  "author": "cuth",
+  "author": "anhulife",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:cuth/postcss-pxtorem.git"
+    "url": "git@github.com:anhulife/postcss-anytoany.git"
   },
-  "bugs": "https://github.com/cuth/postcss-pxtorem/issues",
+  "bugs": "https://github.com/anhulife/postcss-anytoany/issues",
   "main": "index.js",
   "scripts": {
     "test": "jasmine-node spec"

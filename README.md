@@ -1,11 +1,11 @@
-# postcss-pxtorem [![NPM version](https://badge.fury.io/js/postcss-pxtorem.svg)](http://badge.fury.io/js/postcss-pxtorem)
+# postcss-anytoany [![NPM version](https://badge.fury.io/js/postcss-anytoany.svg)](http://badge.fury.io/js/postcss-anytoany)
 
 A plugin for [PostCSS](https://github.com/ai/postcss) that generates rem units from pixel units.
 
 ## Install
 
 ```shell
-$ npm install postcss-pxtorem --save-dev
+$ npm install postcss-anytoany --save-dev
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ h1 {
 ```js
 var fs = require('fs');
 var postcss = require('postcss');
-var pxtorem = require('postcss-pxtorem');
+var pxtorem = require('postcss-anytoany');
 var css = fs.readFileSync('main.css', 'utf8');
 var options = {
     replace: false
@@ -99,7 +99,7 @@ Default:
 var gulp = require('gulp');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
-var pxtorem = require('postcss-pxtorem');
+var pxtorem = require('postcss-anytoany');
 
 gulp.task('css', function () {
 
@@ -127,7 +127,7 @@ Currently, the easiest way to have a single property ignored is to use a capital
     font-size: 16px; // converted to 1rem
 }
 
-// `Px` or `PX` is ignored by `postcss-pxtorem` but still accepted by browsers
+// `Px` or `PX` is ignored by `postcss-anytoany` but still accepted by browsers
 .ignore {
     border: 1Px solid; // ignored
     border-width: 2PX; // ignored

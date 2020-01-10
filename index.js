@@ -2,7 +2,7 @@
 
 var postcss = require('postcss');
 var objectAssign = require('object-assign');
-var pxRegex = require('./lib/pixel-unit-regex');
+var getUnitRegex = require('./lib/pixel-unit-regex');
 var filterPropList = require('./lib/filter-prop-list');
 
 var defaults = {
@@ -12,7 +12,9 @@ var defaults = {
     propList: ['font', 'font-size', 'line-height', 'letter-spacing'],
     replace: true,
     mediaQuery: false,
-    minPixelValue: 0
+    minPixelValue: 0,
+    sourceUnitName: 'px',
+    targetUnitName: 'rem'
 };
 
 var legacyOptions = {
@@ -29,7 +31,8 @@ module.exports = postcss.plugin('postcss-pxtorem', function (options) {
     convertLegacyOptions(options);
 
     var opts = objectAssign({}, defaults, options);
-    var pxReplace = createPxReplace(opts.rootValue, opts.unitPrecision, opts.minPixelValue);
+    var pxRegex = getUnitRegex(opts.sourceUnitName);
+    var pxReplace = createPxReplace(opts.rootValue, opts.unitPrecision, opts.minPixelValue, opts.targetUnitName);
 
     var satisfyPropList = createPropListMatcher(opts.propList);
 
@@ -37,7 +40,7 @@ module.exports = postcss.plugin('postcss-pxtorem', function (options) {
 
         css.walkDecls(function (decl, i) {
             // This should be the fastest test and will remove most declarations
-            if (decl.value.indexOf('px') === -1) return;
+            if (decl.value.indexOf(opts.sourceUnitName) === -1) return;
 
             if (!satisfyPropList(decl.prop)) return;
 
@@ -57,7 +60,7 @@ module.exports = postcss.plugin('postcss-pxtorem', function (options) {
 
         if (opts.mediaQuery) {
             css.walkAtRules('media', function (rule) {
-                if (rule.params.indexOf('px') === -1) return;
+                if (rule.params.indexOf(opts.sourceUnitName) === -1) return;
                 rule.params = rule.params.replace(pxRegex, pxReplace);
             });
         }
@@ -86,13 +89,13 @@ function convertLegacyOptions(options) {
     });
 }
 
-function createPxReplace (rootValue, unitPrecision, minPixelValue) {
+function createPxReplace (rootValue, unitPrecision, minPixelValue, targetUnitName) {
     return function (m, $1) {
         if (!$1) return m;
         var pixels = parseFloat($1);
         if (pixels < minPixelValue) return m;
         var fixedVal = toFixed((pixels / rootValue), unitPrecision);
-        return (fixedVal === 0) ? '0' : fixedVal + 'rem';
+        return (fixedVal === 0) ? '0' : fixedVal + targetUnitName;
     };
 }
 

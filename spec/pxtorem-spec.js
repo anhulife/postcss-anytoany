@@ -386,3 +386,18 @@ describe('filter-prop-list', function () {
         expect(filterPropList.notEndWith(propList).join()).toBe(expected);
     });
 });
+
+describe('unitName', function () {
+    // Deprecate
+    it('should replace source unit name to target unit name', function () {
+        var rules = '.rule { font-size: 15pt }';
+        var expected = '.rule { font-size: 0.9375rpx }';
+        var options = {
+            sourceUnitName: 'pt',
+            targetUnitName: 'rpx'
+        };
+        var processed = postcss(pxtorem(options)).process(basicCSS).css;
+
+        expect(processed).toBe(expected);
+    });
+});

@@ -67,7 +67,9 @@ Default:
     selectorBlackList: [],
     replace: true,
     mediaQuery: false,
-    minPixelValue: 0
+    minPixelValue: 0,
+    sourceUnitName: 'px',
+    targetUnitName: 'rem'
 }
 ```
 
@@ -87,6 +89,8 @@ Default:
 - `replace` (Boolean) replaces rules containing rems instead of adding fallbacks.
 - `mediaQuery` (Boolean) Allow px to be converted in media queries.
 - `minPixelValue` (Number) Set the minimum pixel value to replace.
+- `sourceUnitName` (String) Set the source unit name. Example: `'px'`
+- `targetUnitName` (String) Set the target unit name. Example: `'rem'`
 
 
 ### Use with gulp-postcss and autoprefixer
